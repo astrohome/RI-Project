@@ -1,0 +1,9 @@
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\bin\Debug\WikiStats.exe
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\bin\Debug\WikiStats.pdb
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\WikiStats.Properties.Resources.resources
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\WikiStats.exe
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\WikiStats.pdb
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x86\Debug\WikiStats.MainForm.resources

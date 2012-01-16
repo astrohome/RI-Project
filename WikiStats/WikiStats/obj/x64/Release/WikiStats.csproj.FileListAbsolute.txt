@@ -1,0 +1,20 @@
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\bin\x64\Release\WikiStats.exe
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\bin\x64\Release\WikiStats.pdb
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\ResolveAssemblyReference.cache
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.MainForm.resources
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.Properties.Resources.resources
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\GenerateResource.read.1.tlog
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\GenerateResource.write.1.tlog
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.exe
+D:\Мои документы\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.pdb
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.exe
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.pdb
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\bin\x64\Release\WikiStats.exe
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\bin\x64\Release\WikiStats.pdb
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\ResolveAssemblyReference.cache
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.MainForm.resources
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.Properties.Resources.resources
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\GenerateResource.read.1.tlog
+D:\Profiles\FeLiX\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\GenerateResource.write.1.tlog
+D:\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.exe
+D:\Documents\Study\OrgRech\WikiStats\WikiStats\obj\x64\Release\WikiStats.pdb
