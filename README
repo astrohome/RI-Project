@@ -4,6 +4,8 @@ Next, we'll divide our work. Check here this evening for futher instruction!
 
 Our formule to work with:
 w_{t,d}=\frac{log(1+tf_{t,d})}{\sqrt{\sum_{i=1}^{N} w_{i,d}^{2}}}*\frac{N}{df_{t}}
+BM25: do we need it??
+w_{t,d}=\frac{tf_{t,d}*(k_{1}+1))}{k_{1}+((1-b)+b*\frac{dl}{avdl})+tf_{t,d}}*log(\frac{N-df_{t}+0.5}{df_{t}+0.5})
 it's LATEX, you can visualize it here:
 http://www.codecogs.com/latex/eqneditor.php
 
