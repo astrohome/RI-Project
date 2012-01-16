@@ -6,3 +6,72 @@ Our formule to work with:
 w_{t,d}=\frac{log(1+tf_{t,d})}{\sqrt{\sum_{i=1}^{N} w_{i,d}^{2}}}*\frac{N}{df_{t}}
 it's LATEX, you can visualize it here:
 http://www.codecogs.com/latex/eqneditor.php
+
+So, first. Load all documents and make a dictionary of all words.
+I've got some code in c#, someone should port it, it works fine:
+		StreamReader fs = new StreamReader(Path.GetFileName(url) + ".txt");
+                                                      while (!fs.EndOfStream)
+                                                      {
+                                                          ProceedOneLine(fs.ReadLine());
+                                                      }
+                                                      fs.Close();
+													  
+		/// <summary>
+        /// Proceed one line, analyze, and fill dictionary with statistics.
+        /// </summary>
+        /// <param name="line">Line in file to proceed.</param>
+        private void ProceedOneLine(String line)
+        {
+            String current = line.Trim(); //trim spaces
+            if (current.Length == 0) return; //it could be only spaces in line - skip.
+
+            //<doc><docno>12345</docno>
+            //...
+            if (line[0] == '<')
+            {
+                if (line.Contains("</doc>")) return; //that's end of document
+
+                int start = current.IndexOf("no>") + 3; //find first occurence
+                int end = current.IndexOf("</do"); //last
+                char[] number = new char[end - start]; //copy the number of document
+                current.CopyTo(start, number, 0, number.Length);
+                Int32.TryParse(new string(number), out _currentDocument.number); //and convert to Int32
+                DocumentsNumber++;
+            }
+            else
+            {
+                //for Thread safety reason, we should lock
+                lock (GlobalStatistic)
+                {
+                    var words = current.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+                    //forech trim symbols to get real words and make everything in lower register
+                    foreach (var w in words.Select(word => word.Trim(new[] { ',', '.', ':', ';', '!', '?', '"', ')', '(', '\'' })).Select(w => w.ToLower()))
+                    {
+                        //if it was only symbol, continue;
+                        if (w == "") continue;
+
+                        //If there is such word in dictionary
+                        if (GlobalStatistic.ContainsKey(w))
+                        {
+                            //check if there is current document in list
+                            if (GlobalStatistic[w].ContainsKey(_currentDocument.number))
+                            {
+                                //if so, increment statistic for that document.
+                                GlobalStatistic[w][_currentDocument.number]++;
+                            }
+                            else //or just add document and set 1 - first time this word appeared here
+                            {
+                                GlobalStatistic[w].Add(_currentDocument.number, 1);
+                            }
+                        }
+                        else //we haven't got any statistics for this word -> create
+                        {
+                            GlobalStatistic.Add(w, new Dictionary<int, int> {{_currentDocument.number, 1}});
+                        }
+                    }
+                }
+            }
+        }
+		
+		
