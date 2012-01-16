@@ -11,7 +11,7 @@ package tp;
 public class MainFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainFrame
+     * Creates new form MainFrame test
      */
     public MainFrame() {
         initComponents();
