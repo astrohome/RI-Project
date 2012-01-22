@@ -26,7 +26,7 @@ namespace RIStats
                 {
                     var count = word.Value.Sum(i => i.Value); //Global count of usage of concrete word.
 
-                    if (word.Value.Count >= 1) //Here could be a filter of frequence of using the word.
+                    if (word.Value.Count <= 1) //Here could be a filter of frequence of using the word.
                     //For example, to find words, which are used only once during all the documents.
                     {
                         SetText(count + "=df(" + word.Key + ")" + "\r\n");
@@ -62,7 +62,7 @@ namespace RIStats
         private void bSelectFile_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.Filter = "All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
             Statistics stats = new Statistics();
             Task task = Task.Factory.StartNew(() =>
@@ -70,7 +70,7 @@ namespace RIStats
                      stats.Proceed(openFileDialog1.FileName);
                  }).ContinueWith(_ =>
             {
-                _statistics_Statistics(Statistics.GlobalStatistic);
+                _statistics_Statistics(Statistics.tf);
             });
         }
 
