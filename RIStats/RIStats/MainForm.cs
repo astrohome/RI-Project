@@ -70,7 +70,17 @@ namespace RIStats
                      stats.Proceed(openFileDialog1.FileName);
                  }).ContinueWith(_ =>
             {
-                _statistics_Statistics(Statistics.tf);
+                MessageBox.Show(Statistics.docsltn.First() + " " + Statistics.docsltn.Last() + " " + Statistics.docsltn.Count + " ");
+                stats.Proceedltn();
+                StreamWriter sw = new StreamWriter("IzotovRoulyAllaoui_01_ltn_articles.txt", false);
+                
+                foreach (var doc in Statistics.docsltn)
+                {
+                    sw.WriteLine("Doc " + doc.Key.ToString() + " has score (ltn): " + doc.Value.ToString());
+                }
+
+                sw.Close();
+                //_statistics_Statistics(Statistics.tf);
             });
         }
 

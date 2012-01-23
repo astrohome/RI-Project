@@ -13,12 +13,24 @@ namespace RIStats
         /// <summary>
         /// Statistics by itself.
         /// </summary>
-        public static readonly Dictionary<string, Dictionary<Int32, Int32>> tf = new Dictionary<String, Dictionary<Int32, Int32>>();
-        public static readonly Dictionary<Int32, Int32> docs = new Dictionary<Int32, Int32>();
+        public static readonly Dictionary<String, Dictionary<Int32, Int32>> tf = new Dictionary<String, Dictionary<Int32, Int32>>();
+        public static readonly Dictionary<Int32, Dictionary<String, Int32>> bm25_tf = new Dictionary<Int32, Dictionary<String, Int32>>();
+        public static readonly Dictionary<Int32, Double> docsltn = new Dictionary<Int32, Double>();
+        public static readonly Dictionary<Int32, Int32> dl = new Dictionary<Int32, Int32>();
+
+
+        private List<Int32> wordCountInDoc = new List<int>();
+
 
         public static Int32 DocumentsNumber { get; set; }
 
         public static Int32 FinishedNumber { get; set; }
+
+        public static Int32 Elt { get; set; }
+
+        public static Int32 K { get; set; }
+        public static Int32 B { get; set; }
+
 
         /// <summary>
         /// Current document. class used here to provide ability of using lock {} construction.
@@ -28,6 +40,39 @@ namespace RIStats
             public Int32 number;
         }
         private CurrentDoc _currentDocument = new CurrentDoc();
+
+        private Int32 df(String word)
+        {
+            Dictionary<Int32, Int32> temp = new Dictionary<int,int>(); 
+            tf.TryGetValue(word, out temp);
+            return temp.Count;
+        }
+
+        public void ProceedBM25_TF()
+        {
+            foreach (var w in tf)
+            {
+
+            }
+        }
+
+        public void Proceedltn()
+        {
+            foreach (var w in tf)
+            {
+                foreach (var doc in w.Value)
+                {
+                    double ltn = 0;
+                    Int32 df2 = df(w.Key);
+                    if(df2!=0)
+                        ltn = Math.Log10(1 + doc.Value) * DocumentsNumber / df2;
+
+                    dl[doc.Key] += doc.Value;
+                    docsltn[doc.Key] += ltn;
+                    //Console.WriteLine("Word " + w.Key.ToString() + " in doc " + doc.Key + " has ltn: " + ltn);
+                }
+            }
+        }
 
         public void ProceedXML(String url)
         {
@@ -52,8 +97,6 @@ namespace RIStats
             }
             reader.Close();
         }
-
-
 
         private void ProceedOneLineXML(String line)
         {
@@ -113,6 +156,9 @@ namespace RIStats
             Console.WriteLine(FinishedNumber + " finished!");
         }
 
+        int wordCount = 0;
+        bool docEnded = false;
+
         /// <summary>
         /// Proceed one line, analyze, and fill dictionary with statistics.
         /// </summary>
@@ -133,6 +179,20 @@ namespace RIStats
                 char[] number = new char[end - start]; //copy the number of document
                 current.CopyTo(start, number, 0, number.Length);
                 Int32.TryParse(new string(number), out _currentDocument.number); //and convert to Int32
+
+                lock (docsltn)
+                {
+                    docsltn.Add(_currentDocument.number, 0);
+                    dl.Add(_currentDocument.number, 0);
+                }
+
+                if (docEnded)
+                {
+                    wordCountInDoc.Add(wordCount);
+                    wordCount = 0;
+                }
+
+                wordCount++;                
                 DocumentsNumber++;
             }
             else
@@ -143,10 +203,17 @@ namespace RIStats
                     var words = current.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     //forech trim symbols to get real words and make everything in lower register
-                    foreach (var w in words.Select(word => word.Trim(new[] { ',', '.', ':', ';', '!', '?', '"', ')', '(', '\'' })).Select(w => w.ToLower()))
+                    foreach (var w in words.Select(word => word.Trim(new[] { ',', '.', ':', ';', '!', '?', '"', ')', '(', '\'', '`', '~', '%', '@', '^', '=' })).Select(w => w.ToLower()))
                     {
+
                         //if it was only symbol, continue;
                         if (w == "") continue;
+
+                        double t = 0;
+
+                        if (Double.TryParse(w, out t)) continue;
+
+                        wordCount++;
 
                         //If there is such word in dictionary
                         if (tf.ContainsKey(w))
