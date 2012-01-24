@@ -17,6 +17,7 @@ namespace RIStats
         public readonly Dictionary<String, Dictionary<Int32, Double>> bm25_tf = new Dictionary<String, Dictionary<Int32, Double>>();
         public readonly Dictionary<Int32, Double> docsltn = new Dictionary<Int32, Double>();
         public readonly Dictionary<Int32, Int32> dl = new Dictionary<Int32, Int32>();
+        public readonly Dictionary<String, Int32> df = new Dictionary<string, int>();
 
         private Double _avdl = 0;
         public Double avdl
@@ -38,8 +39,8 @@ namespace RIStats
 
         public Int32 N { get; set; }
 
-        public Int32 K { get; set; }
-        public Int32 B { get; set; }
+        public Double K { get; set; }
+        public Double B { get; set; }
 
 
         /// <summary>
@@ -51,11 +52,16 @@ namespace RIStats
         }
         private CurrentDoc _currentDocument = new CurrentDoc();
 
-        private Int32 df(String word)
+        private Int32 dfw(String word)
         {
             Dictionary<Int32, Int32> temp = new Dictionary<int,int>(); 
             tf.TryGetValue(word, out temp);
-            return temp.Count;
+            return temp.Keys.Count;
+        }
+
+        private Int32 tf_td(String word, Int32 docno)
+        {
+            return tf[word][docno];
         }
 
         public void ProceedBM25_TF()
@@ -64,7 +70,19 @@ namespace RIStats
             {
                 foreach (var doc in w.Value)
                 {
+                    Double bm25 = (Double) (doc.Value * (K + 1.0f)) / (K * ((1.0f - B) + B * dl[doc.Key] / avdl) + doc.Value) * Math.Log((N - df[w.Key] + 0.5f) / (df[w.Key] + 0.5f));
 
+                    Dictionary<Int32, Double> dict = new Dictionary<int,double>();
+
+                    if (bm25_tf.TryGetValue(w.Key, out dict))
+                    {
+                        if (bm25_tf[w.Key] == null)
+                            bm25_tf[w.Key] = new Dictionary<int, double>() { { doc.Key, bm25 } };
+                        else
+                            bm25_tf[w.Key].Add(doc.Key, bm25);
+                    }
+                    else
+                        bm25_tf.Add(w.Key, new Dictionary<int, double> { { doc.Key, bm25 } });
                 }
             }
         }
@@ -73,14 +91,18 @@ namespace RIStats
         {
             foreach (var w in tf)
             {
+                Int32 df2 = dfw(w.Key);
+                df[w.Key] = df2;
+                
                 foreach (var doc in w.Value)
                 {
                     double ltn = 0;
-                    Int32 df2 = df(w.Key);
+                    dl[doc.Key] = df2;
                     if(df2!=0)
                         ltn = Math.Log10(1 + doc.Value) * N / df2;
 
                     dl[doc.Key] += df2;
+                    
                     docsltn[doc.Key] += ltn;
                     //Console.WriteLine("Word " + w.Key.ToString() + " in doc " + doc.Key + " has ltn: " + ltn);
                 }
@@ -166,10 +188,6 @@ namespace RIStats
             }) /*.ContinueWith(_ => ShowStats(GlobalStatistic))*/;
             task.Wait();
         }
-
-        int wordCount = 0;
-        bool docEnded = false;
-
         /// <summary>
         /// Proceed one line, analyze, and fill dictionary with statistics.
         /// </summary>
@@ -207,7 +225,7 @@ namespace RIStats
                     var words = current.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     //forech trim symbols to get real words and make everything in lower register
-                    foreach (var w in words.Select(word => word.Trim(new[] { ',', '.', ':', ';', '!', '?', '"', ')', '(', '\'', '`', '~', '%', '@', '^', '=' })).Select(w => w.ToLower()))
+                    foreach (var w in words.Select(word => word.Trim(new[] { ',', '.', '-', ':', ';', '!', '?', '"', ')', '(', '\'', '`', '~', '%', '@', '^', '=' })).Select(w => w.ToLower()))
                     {
 
                         //if it was only symbol, continue;
@@ -237,6 +255,9 @@ namespace RIStats
                         {
                             tf.Add(w, new Dictionary<int, int> { { _currentDocument.number, 1 } });
                         }
+                        int trash;
+                        if(!df.TryGetValue(w, out trash))
+                        df.Add(w, 0);
                     }
                 }
             }

@@ -61,25 +61,54 @@ namespace RIStats
 
         private void bSelectFile_Click(object sender, EventArgs e)
         {
+            bSelectFile.Enabled = false;
             openFileDialog1.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
             openFileDialog1.Filter = "All files (*.*)|*.*";
             openFileDialog1.ShowDialog();
             Statistics stats = new Statistics();
+            stats.B = 0.5;
+            stats.K = 1;
             Task task = Task.Factory.StartNew(() =>
                  {
                      stats.Proceed(openFileDialog1.FileName);
                  }).ContinueWith(_ =>
             {
-                MessageBox.Show(Statistics.docsltn.First() + " " + Statistics.docsltn.Last() + " " + Statistics.docsltn.Count + " ");
+                //MessageBox.Show(stats.docsltn.First() + " " + stats.docsltn.Last() + " " + stats.docsltn.Count + " ");
                 stats.Proceedltn();
-                StreamWriter sw = new StreamWriter("IzotovRoulyAllaoui_01_ltn_articles.txt", false);
-                
-                foreach (var doc in Statistics.docsltn)
+                StreamWriter sw = new StreamWriter("Izotov_02_ltn_articles.txt", false);
+
+                foreach (var doc in stats.docsltn)
                 {
                     sw.WriteLine("Doc " + doc.Key.ToString() + " has score (ltn): " + doc.Value.ToString());
                 }
 
                 sw.Close();
+
+                Task task2 = Task.Factory.StartNew(() =>
+                 {
+                     stats.ProceedBM25_TF();
+                 }).ContinueWith(_2 =>
+            {
+                sw = new StreamWriter("Izotov_01_bm25_articles.txt", false);
+                foreach (var word in stats.bm25_tf)
+                {
+                    foreach (var doc in stats.docsltn)
+                    {
+                        sw.Write(doc.Key + '\t');
+                        foreach (var word_i in stats.bm25_tf)
+                        {
+                            foreach (var doc_i in word_i.Value)
+                            {
+                                if (doc_i.Key == doc.Key)
+                                    sw.Write(doc_i.Value + '\t');
+                                else sw.Write("0" + '\t');
+                            }
+                        }
+                        sw.WriteLine("");
+                    }
+                }
+                sw.Close();
+            });
                 //_statistics_Statistics(Statistics.tf);
             });
         }
