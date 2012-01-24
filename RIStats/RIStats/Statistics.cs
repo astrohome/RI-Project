@@ -13,23 +13,33 @@ namespace RIStats
         /// <summary>
         /// Statistics by itself.
         /// </summary>
-        public static readonly Dictionary<String, Dictionary<Int32, Int32>> tf = new Dictionary<String, Dictionary<Int32, Int32>>();
-        public static readonly Dictionary<Int32, Dictionary<String, Int32>> bm25_tf = new Dictionary<Int32, Dictionary<String, Int32>>();
-        public static readonly Dictionary<Int32, Double> docsltn = new Dictionary<Int32, Double>();
-        public static readonly Dictionary<Int32, Int32> dl = new Dictionary<Int32, Int32>();
+        public readonly Dictionary<String, Dictionary<Int32, Int32>> tf = new Dictionary<String, Dictionary<Int32, Int32>>();
+        public readonly Dictionary<String, Dictionary<Int32, Double>> bm25_tf = new Dictionary<String, Dictionary<Int32, Double>>();
+        public readonly Dictionary<Int32, Double> docsltn = new Dictionary<Int32, Double>();
+        public readonly Dictionary<Int32, Int32> dl = new Dictionary<Int32, Int32>();
 
+        private Double _avdl = 0;
+        public Double avdl
+        {
+            get
+            {
+                if (_avdl == 0)
+                {
+                    Int32 count = 0;
+                    foreach (var item in dl)
+                    {
+                        count += item.Value;
+                    }
+                    return _avdl = count / N;
+                }
+                return _avdl;
+            }
+        }
 
-        private List<Int32> wordCountInDoc = new List<int>();
+        public Int32 N { get; set; }
 
-
-        public static Int32 DocumentsNumber { get; set; }
-
-        public static Int32 FinishedNumber { get; set; }
-
-        public static Int32 Elt { get; set; }
-
-        public static Int32 K { get; set; }
-        public static Int32 B { get; set; }
+        public Int32 K { get; set; }
+        public Int32 B { get; set; }
 
 
         /// <summary>
@@ -52,7 +62,10 @@ namespace RIStats
         {
             foreach (var w in tf)
             {
+                foreach (var doc in w.Value)
+                {
 
+                }
             }
         }
 
@@ -65,9 +78,9 @@ namespace RIStats
                     double ltn = 0;
                     Int32 df2 = df(w.Key);
                     if(df2!=0)
-                        ltn = Math.Log10(1 + doc.Value) * DocumentsNumber / df2;
+                        ltn = Math.Log10(1 + doc.Value) * N / df2;
 
-                    dl[doc.Key] += doc.Value;
+                    dl[doc.Key] += df2;
                     docsltn[doc.Key] += ltn;
                     //Console.WriteLine("Word " + w.Key.ToString() + " in doc " + doc.Key + " has ltn: " + ltn);
                 }
@@ -152,8 +165,6 @@ namespace RIStats
                 fs.Close();
             }) /*.ContinueWith(_ => ShowStats(GlobalStatistic))*/;
             task.Wait();
-            FinishedNumber++;
-            Console.WriteLine(FinishedNumber + " finished!");
         }
 
         int wordCount = 0;
@@ -185,15 +196,8 @@ namespace RIStats
                     docsltn.Add(_currentDocument.number, 0);
                     dl.Add(_currentDocument.number, 0);
                 }
-
-                if (docEnded)
-                {
-                    wordCountInDoc.Add(wordCount);
-                    wordCount = 0;
-                }
-
-                wordCount++;                
-                DocumentsNumber++;
+              
+                N++;
             }
             else
             {
@@ -213,7 +217,7 @@ namespace RIStats
 
                         if (Double.TryParse(w, out t)) continue;
 
-                        wordCount++;
+                        dl[_currentDocument.number]++;
 
                         //If there is such word in dictionary
                         if (tf.ContainsKey(w))
