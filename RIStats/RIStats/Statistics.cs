@@ -15,6 +15,7 @@ namespace RIStats
         /// </summary>
         public readonly Dictionary<String, Dictionary<Int32, Int32>> tf = new Dictionary<String, Dictionary<Int32, Int32>>();
         public readonly Dictionary<String, Dictionary<Int32, Double>> bm25_tf = new Dictionary<String, Dictionary<Int32, Double>>();
+        public readonly Dictionary<Int32, Double> bm25_tf_finals = new Dictionary<Int32, Double>();
         public readonly Dictionary<Int32, Double> docsltn = new Dictionary<Int32, Double>();
         public readonly Dictionary<Int32, Int32> dl = new Dictionary<Int32, Int32>();
         public readonly Dictionary<String, Int32> df = new Dictionary<string, int>();
@@ -71,6 +72,8 @@ namespace RIStats
                 foreach (var doc in w.Value)
                 {
                     Double bm25 = (Double) (doc.Value * (K + 1.0f)) / (K * ((1.0f - B) + B * dl[doc.Key] / avdl) + doc.Value) * Math.Log((N - df[w.Key] + 0.5f) / (df[w.Key] + 0.5f));
+
+                    bm25_tf_finals[doc.Key] += bm25;
 
                     Dictionary<Int32, Double> dict = new Dictionary<int,double>();
 
@@ -213,6 +216,7 @@ namespace RIStats
                 {
                     docsltn.Add(_currentDocument.number, 0);
                     dl.Add(_currentDocument.number, 0);
+                    bm25_tf_finals.Add(_currentDocument.number, 0);
                 }
               
                 N++;

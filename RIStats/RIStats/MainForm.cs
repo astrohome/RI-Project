@@ -90,7 +90,7 @@ namespace RIStats
                  }).ContinueWith(_2 =>
             {
                 sw = new StreamWriter("Izotov_01_bm25_articles.txt", false);
-                foreach (var word in stats.bm25_tf)
+                /*foreach (var word in stats.bm25_tf)
                 {
                     foreach (var doc in stats.docsltn)
                     {
@@ -106,6 +106,12 @@ namespace RIStats
                         }
                         sw.WriteLine("");
                     }
+
+                }*/
+
+                foreach (var doc in stats.bm25_tf_finals)
+                {
+                    sw.WriteLine("Doc " + doc.Key.ToString() + " has score (bm25): " + doc.Value.ToString());
                 }
                 sw.Close();
             });
