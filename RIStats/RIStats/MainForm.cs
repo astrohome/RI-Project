@@ -77,9 +77,12 @@ namespace RIStats
                 stats.Proceedltn();
                 StreamWriter sw = new StreamWriter("Izotov_02_ltn_articles.txt", false);
 
-                foreach (var doc in stats.docsltn)
+                //2009011 Q0 3945065 21 73.61 OualidSamiYounessYassine /article[1]
+                int rank = 0;
+                foreach (var doc in stats.docsltn.OrderByDescending(x => x.Value))
                 {
-                    sw.WriteLine("Doc " + doc.Key.ToString() + " has score (ltn): " + doc.Value.ToString());
+                    sw.WriteLine("2009011 Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(doc.Value,2) + " ltn /article[1]");
+                    rank++;
                 }
 
                 sw.Close();
@@ -108,10 +111,11 @@ namespace RIStats
                     }
 
                 }*/
-
-                foreach (var doc in stats.bm25_tf_finals)
+                rank = 0;
+                foreach (var doc in stats.bm25_tf_finals.OrderByDescending(x => x.Value))
                 {
-                    sw.WriteLine("Doc " + doc.Key.ToString() + " has score (bm25): " + doc.Value.ToString());
+                    sw.WriteLine("2009011 Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(doc.Value, 2) + " ltn /article[1]");
+                    rank++;
                 }
                 sw.Close();
             });
