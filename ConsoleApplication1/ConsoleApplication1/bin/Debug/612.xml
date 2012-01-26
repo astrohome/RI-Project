@@ -1,0 +1,856 @@
+<article xmlns:xlink='http://www.w3.org/1999/xlink'>
+<header>
+<title>Arithmetic mean</title>
+<id>612</id>
+<revision>
+<id>244345277</id>
+<timestamp>2008-10-10T10:43:39Z</timestamp>
+<contributor>
+<username>Ahruman</username>
+<id>128625</id>
+</contributor>
+</revision>
+<categories>
+<category>Means</category>
+<category>Statistics articles linked to the portal</category>
+<category>Statistics articles with navigational template</category>
+</categories>
+</header>
+<bdy>
+
+In <link xlink:type='simple' xlink:href='../831/18831.xml'>
+mathematics</link> and <link xlink:type='simple' xlink:href='../685/26685.xml'>
+statistics</link>, the <b>arithmetic <link xlink:type='simple' xlink:href='../192/19192.xml'>
+mean</link></b> (or simply the <b>mean</b>) of a list of numbers is the sum of all the members of the list divided by the number of items in the list.  If the list is a <link xlink:type='simple' xlink:href='../585/27585.xml'>
+statistical population</link>, then the mean of that population is called a <b>population mean</b>. If the list is a <link xlink:type='simple' xlink:href='../361/160361.xml'>
+statistical sample</link>, we call the resulting <link xlink:type='simple' xlink:href='../703/26703.xml'>
+statistic</link> a <b>sample mean</b>.<p>
+
+The mean is the most commonly-used type of <link xlink:type='simple' xlink:href='../167/60167.xml'>
+average</link> and is often referred to simply as <it>the</it> average. The term 'mean' or 'arithmetic mean' is preferred in mathematics and statistics to distinguish it from other <link xlink:type='simple' xlink:href='../167/60167.xml'>
+average</link>s such as the <link xlink:type='simple' xlink:href='../837/18837.xml'>
+median</link> and the <link xlink:type='simple' xlink:href='../127/1432127.xml'>
+mode</link>.</p>
+
+<sec>
+<st>
+Introduction</st>
+<p>
+
+If we denote a set of data by <it>X</it> = (<it>x</it>1, <it>x</it>2, ..., <it>xn</it>), then the sample mean is typically denoted with a horizontal bar over the variable (<math>\bar{x} \,</math>, enunciated '<it>x</it> bar').</p>
+<p>
+
+The <link xlink:type='simple' xlink:href='../751/166751.xml'>
+Greek letter μ</link> is used to denote the arithmetic mean of an entire population.  Or, for a <link xlink:type='simple' xlink:href='../685/25685.xml'>
+random variable</link> that has a defined mean, μ is the <it>probabilistic mean</it> or <link xlink:type='simple' xlink:href='../653/9653.xml'>
+expected value</link> of the random number.  If the set <it>X</it> is a collection of random numbers with probabilistic mean of μ, then for any individual sample, <it>xi</it>, from that collection, μ = E{<it>xi</it>} is the <link xlink:type='simple' xlink:href='../653/9653.xml'>
+expected value</link> of that sample.</p>
+<p>
+
+In practice, the difference between μ and <math>\bar{x} \,</math> is that μ is typically unobservable because one observes only a sample rather than the whole population, and if the sample is drawn randomly, then one may treat <math>\bar{x} \,</math>, but not μ, as a <link xlink:type='simple' xlink:href='../685/25685.xml'>
+random variable</link>, attributing a <link xlink:type='simple' xlink:href='../543/23543.xml'>
+probability distribution</link> to it (the <link xlink:type='simple' xlink:href='../670/520670.xml'>
+sampling distribution</link> of the mean).</p>
+<p>
+
+Both are computed in the same way:
+<indent level='1'>
+
+<math>\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i  =  \frac{1}{n} (x_1+\cdots+x_n).</math>
+</indent>
+
+If <it>X</it> is a <link xlink:type='simple' xlink:href='../685/25685.xml'>
+random variable</link>, then the <link xlink:type='simple' xlink:href='../653/9653.xml'>
+expected value</link> of <it>X</it> can be seen as the long-term arithmetic mean that occurs on repeated measurements of <it>X</it>. This is the content of the <link xlink:type='simple' xlink:href='../055/157055.xml'>
+law of large numbers</link>. As a result, the sample mean is used to estimate unknown expected values.</p>
+<p>
+
+Simple algebra will prove that a mean of <it>n</it>&nbsp;+&nbsp;1 numbers is larger than the mean of <it>n</it> numbers if and only if the new number is larger than the old mean, smaller if and only if it is smaller, and remains stable if and only if it is equal to the old mean.  The larger <it>n</it> is, the smaller is the magnitude of the change in the mean relative to the distance between the old mean and the new number.</p>
+<p>
+
+Note that several other 'means' have been defined, including the <link xlink:type='simple' xlink:href='../143/13143.xml'>
+generalized mean</link>, the <link xlink:type='simple' xlink:href='../869/566869.xml'>
+generalized f-mean</link>, the <link xlink:type='simple' xlink:href='../463/14463.xml'>
+harmonic mean</link>, the <link xlink:type='simple' xlink:href='../090/3090.xml'>
+arithmetic-geometric mean</link>, and various <link xlink:type='simple' xlink:href='../274/33274.xml'>
+weighted mean</link>s.</p>
+
+<ss1>
+<st>
+Examples</st>
+<p>
+
+<list>
+<entry level='1' type='bullet'>
+
+ For three numbers, add them and divide them by 3:</entry>
+</list>
+</p>
+<p>
+
+<indent level='2'>
+
+ <math>\frac{x_1 + x_2 + x_3}{3}.</math>
+</indent>
+
+<list>
+<entry level='1' type='bullet'>
+
+ For four numbers, add them and divide by 4:</entry>
+</list>
+</p>
+<p>
+
+<indent level='2'>
+
+ <math>\frac{x_1 + x_2 + x_3 + x_4}{4}.</math>
+</indent>
+
+</p>
+</ss1>
+</sec>
+<sec>
+<st>
+Problems with some uses of the mean</st>
+
+<ss1>
+<st>
+Not robust</st>
+
+<p>
+
+<indent level='1'>
+
+<it>Main article: <link xlink:type='simple' xlink:href='../691/2885691.xml'>
+Robust statistics</link></it>
+</indent>
+While the mean is often used to report <link xlink:type='simple' xlink:href='../167/60167.xml'>
+central tendency</link>, it is not a <link xlink:type='simple' xlink:href='../691/2885691.xml'>
+robust statistic</link>, meaning that it is greatly influenced by <link xlink:type='simple' xlink:href='../951/160951.xml'>
+outlier</link>s. Notably, for <link xlink:type='simple' xlink:href='../212/28212.xml'>
+skewed distribution</link>s, the arithmetic mean may not accord with one's notion of 'middle', and robust statistics such as the <link xlink:type='simple' xlink:href='../837/18837.xml'>
+median</link> may be a better description of central tendency.</p>
+<p>
+
+A classic example is <link>
+average income</link>. The arithmetic mean may be misinterpreted as the median to imply that most people's incomes are higher than is in fact the case.  When presented with an 'average' one may be led to believe that <it>most</it> people's incomes are near this number.  This 'average' (arithmetic mean) income <it>is</it> higher than most people's incomes, because high income outliers skew the result higher (in contrast, the median income 'resists' such skew). However, this 'average' says nothing about the number of people near the median income (nor does it say anything about the modal income that most people are near).  Nevertheless, because one might carelessly relate 'average' and 'most people' one might incorrectly assume that most people's incomes would be higher (nearer this inflated 'average') than they are. For instance, reporting the 'average' <link xlink:type='simple' xlink:href='../981/405981.xml'>
+net worth</link> in <village wordnetid='108672738' confidence='0.9508927676800064'>
+<link xlink:type='simple' xlink:href='../017/138017.xml'>
+Medina, Washington</link></village>
+ as the arithmetic mean of all annual net worths would yield a surprisingly high number because of <person wordnetid='100007846' confidence='0.9508927676800064'>
+<link xlink:type='simple' xlink:href='../747/3747.xml'>
+Bill Gates</link></person>
+. Consider the scores (1, 2, 2, 2, 3, 9). The arithmetic mean is 3.17, but five out of six scores are below this.</p>
+
+</ss1>
+<ss1>
+<st>
+Compounding</st>
+
+<p>
+
+<indent level='1'>
+
+<it>Main article: <link xlink:type='simple' xlink:href='../956/3440956.xml'>
+Rate of return</link></it>
+</indent>
+
+If numbers <it>multiply</it> instead of <it>add,</it> one should average using the <link xlink:type='simple' xlink:href='../046/13046.xml'>
+geometric mean</link>, not the arithmetic mean. This most often happens when computing the <link xlink:type='simple' xlink:href='../956/3440956.xml'>
+rate of return</link>, as in finance.</p>
+<p>
+
+For example, if a stock fell 10 % in the first year, and rose 30 % in the second year, then it would be incorrect to report its 'average' increase per year over this two year period as the arithmetic mean (&amp;minus;10 % + 30 %)/2 = 10 %; the correct average in this case is the <link xlink:type='simple' xlink:href='../226/1645226.xml'>
+compound annual growth rate</link>, which yields an annualized increase per year of only 8.2 %.</p>
+<p>
+
+The reason for this is that each of those percents have different starting points: the 30% is 30% <it>of a smaller number</it>. If the stock starts at $30 and falls 10 %, it is now at $27. If the stock then rises 30 %, it is now $35.1. The arithmetic mean of those rises is 10 %, but since the stock rose by $5.1 in 2 years, an <link xlink:type='simple' xlink:href='../167/60167.xml'>
+average</link> of 8.2 % would result in the final $35.1 figure [$30(1-10 %)(1+30 %) = $30(1+8.2 %)(1+8.2 %) = $35.1]. If one used the arithmetic mean 10 % in the same way, one would not get the actual increase [$30(1+10 %)(1+10 %) = $36.3].</p>
+<p>
+
+Stated generally, compounding yields 90% * 130% = 117% overall growth, and annualizing yields <math>\sqrt{117%}\approx 108.2%</math>, so 8.2% per year.</p>
+
+</ss1>
+<ss1>
+<st>
+Directions</st>
+
+<p>
+
+<indent level='1'>
+
+<it>Main article: <idea wordnetid='105833840' confidence='0.8'>
+<concept wordnetid='105835747' confidence='0.8'>
+<category wordnetid='105838765' confidence='0.8'>
+<type wordnetid='105840188' confidence='0.8'>
+<kind wordnetid='105839024' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../970/1444970.xml'>
+Directional statistics</link></kind>
+</type>
+</category>
+</concept>
+</idea>
+</it>
+</indent>
+Particular care must be taken when using cyclic data such as phases or <link xlink:type='simple' xlink:href='../196/1196.xml'>
+angle</link>s. Naïvely taking the arithmetic mean of 1° and 359° yields a result of 180°.
+This is incorrect for two reasons:
+<list>
+<entry level='1' type='bullet'>
+
+ Firstly, angle measurements are only defined up to a factor of <idea wordnetid='105833840' confidence='0.8'>
+<concept wordnetid='105835747' confidence='0.8'>
+<constant wordnetid='105858936' confidence='0.8'>
+<unit_of_measurement wordnetid='113583724' confidence='0.8'>
+<quantity wordnetid='105855125' confidence='0.8'>
+<definite_quantity wordnetid='113576101' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../294/1195294.xml'>
+360°</link></definite_quantity>
+</quantity>
+</unit_of_measurement>
+</constant>
+</concept>
+</idea>
+ (or 2π, if measuring in <link xlink:type='simple' xlink:href='../003/26003.xml'>
+radian</link>s). Thus one could as easily call these 1° and -1°, or 1° and 719° – each of which gives a different average.</entry>
+<entry level='1' type='bullet'>
+
+ Secondly, in this situation, 0° (equivalently, 360°) is geometrically a better <it>average</it> value: there is lower <link xlink:type='simple' xlink:href='../589/27589.xml'>
+dispersion</link> about it (the points are both 1° from it, and 179° from 180°, the putative average).</entry>
+</list>
+</p>
+<p>
+
+In general application such an oversight will lead to the average value artificially moving towards the middle of the numerical range.  A solution to this problem is to use the optimization formulation (viz, define the mean as the central point: the point about which one has the lowest dispersion), and redefine the difference as a modular distance (i.e., the distance on the circle: so the modular distance between 1° and 359° is 2°, not 358°).</p>
+
+</ss1>
+</sec>
+<sec>
+<st>
+See also</st>
+
+<p>
+
+<table style='background:#f9f9f9; font-size:85%; line-height:110%; '>
+<row>
+<col>
+ <image width='75x28px' src='Fisher_iris_versicolor_sepalwidth.svg'>
+</image>
+</col>
+<col style='padding:0 0.2em;'>
+ <b><it>
+Statistics&#32;portal</it></b></col>
+</row>
+</table>
+</p>
+
+<p>
+
+<list>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../167/60167.xml'>
+Average</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../192/19192.xml'>
+Mean</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../127/1432127.xml'>
+Mode</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../837/18837.xml'>
+Median</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../587/27587.xml'>
+Summary statistics</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../167/60167.xml'>
+Central tendency</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../143/13143.xml'>
+Generalized mean</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../046/13046.xml'>
+Geometric mean</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../344/32344.xml'>
+Variance</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../590/27590.xml'>
+Standard deviation</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../011/605011.xml'>
+Inequality of arithmetic and geometric means</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../942/1047942.xml'>
+Muirhead's inequality</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../839/1776839.xml'>
+Sample size</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../756/10005756.xml'>
+Sample mean and covariance</link></entry>
+<entry level='1' type='bullet'>
+
+ <link xlink:type='simple' xlink:href='../670/5647670.xml'>
+Empirical measure</link></entry>
+</list>
+</p>
+
+
+</sec>
+<sec>
+<st>
+Further reading</st>
+<p>
+
+<list>
+<entry level='1' type='bullet'>
+
+<physical_entity wordnetid='100001930' confidence='0.8'>
+<communicator wordnetid='109610660' confidence='0.8'>
+<person wordnetid='100007846' confidence='0.8'>
+<statistician wordnetid='110653238' confidence='0.8'>
+<causal_agent wordnetid='100007347' confidence='0.8'>
+<scientist wordnetid='110560637' confidence='0.8'>
+<writer wordnetid='110794014' confidence='0.8'>
+<mathematician wordnetid='110301261' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../593/316593.xml'>
+Darrell Huff</link></mathematician>
+</writer>
+</scientist>
+</causal_agent>
+</statistician>
+</person>
+</communicator>
+</physical_entity>
+, <it>How to lie with statistics</it>, Victor Gollancz, 1954 (ISBN 0-393-31072-8).</entry>
+</list>
+</p>
+
+</sec>
+<sec>
+<st>
+External links</st>
+<p>
+
+<list>
+<entry level='1' type='bullet'>
+
+<weblink xlink:type='simple' xlink:href='http://www.sengpielaudio.com/calculator-geommean.htm'>
+Calculations and comparisons between arithmetic and geometric mean between two numbers</weblink></entry>
+<entry level='1' type='bullet'>
+
+<weblink xlink:type='simple' xlink:href='http://people.revoledu.com/kardi/tutorial/BasicMath/Average/index.html'>
+Mean or Average</weblink></entry>
+</list>
+</p>
+
+<p>
+
+<table style=';' class='navbox' cellspacing='0'>
+<row>
+<col style='padding:2px;'>
+<table style='width:100%;background:transparent;color:inherit;;' class='nowraplinks collapsible autocollapse ' cellspacing='0'>
+<row>
+<header colspan='2' style=';' class='navbox-title'>
+<link xlink:type='simple' xlink:href='../685/26685.xml'>
+Statistics</link></header>
+</row>
+<row style='height:2px;'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../541/9541.xml'>
+Design of experiments</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../585/27585.xml'>
+Population</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../361/160361.xml'>
+Sampling</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../596/27596.xml'>
+Stratified sampling</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../262/10306262.xml'>
+Replication</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../339/1822339.xml'>
+Blocking</link></col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../839/1776839.xml'>
+Sample size estimation</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../673/226673.xml'>
+Null hypothesis</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../892/645892.xml'>
+Alternative hypothesis</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../877/5657877.xml'>
+Type I and type II errors</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../695/238695.xml'>
+Statistical power</link>&nbsp;&amp;bull; <know-how wordnetid='105616786' confidence='0.8'>
+<method wordnetid='105660268' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../276/437276.xml'>
+Effect size</link></method>
+</know-how>
+</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../187/8187.xml'>
+Descriptive statistics</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<table style='width:100%;;;;' class='nowraplinks  navbox-subgroup' cellspacing='0'>
+<row>
+<col style=';padding-left:0em;padding-right:0em;;' class='navbox-group'>
+<structure wordnetid='105726345' confidence='0.8'>
+<idea wordnetid='105833840' confidence='0.8'>
+<concept wordnetid='105835747' confidence='0.8'>
+<category wordnetid='105838765' confidence='0.8'>
+<arrangement wordnetid='105726596' confidence='0.8'>
+<type wordnetid='105840188' confidence='0.8'>
+<distribution wordnetid='105729036' confidence='0.8'>
+<kind wordnetid='105839024' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../792/5792.xml'>
+Continuous  data</link></kind>
+</distribution>
+</type>
+</arrangement>
+</category>
+</concept>
+</idea>
+</structure>
+</col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<table style='width:100%;;;;' class='nowraplinks  navbox-subgroup' cellspacing='0'>
+<row>
+<col style=';padding-left:0em;padding-right:0em;;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../516/17516.xml'>
+Location</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../192/19192.xml'>
+Mean</link> (<link xlink:type='simple' xlink:href='../612/612.xml'>
+Arithmetic</link>, <link xlink:type='simple' xlink:href='../046/13046.xml'>
+Geometric</link>, <link xlink:type='simple' xlink:href='../463/14463.xml'>
+Harmonic</link>)&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../837/18837.xml'>
+Median</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../127/1432127.xml'>
+Mode</link></col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';padding-left:0em;padding-right:0em;;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../589/27589.xml'>
+Dispersion</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../588/27588.xml'>
+Range</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../590/27590.xml'>
+Standard deviation</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../687/1012687.xml'>
+Coefficient of variation</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../907/354907.xml'>
+Percentile</link></col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';padding-left:0em;padding-right:0em;;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../684/368684.xml'>
+Moments</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../344/32344.xml'>
+Variance</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../212/28212.xml'>
+Skewness</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../848/16848.xml'>
+Kurtosis</link></col>
+</row>
+</table>
+</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';padding-left:0em;padding-right:0em;;' class='navbox-group'>
+<idea wordnetid='105833840' confidence='0.8'>
+<concept wordnetid='105835747' confidence='0.8'>
+<category wordnetid='105838765' confidence='0.8'>
+<type wordnetid='105840188' confidence='0.8'>
+<kind wordnetid='105839024' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../188/8188.xml'>
+Categorical data</link></kind>
+</type>
+</category>
+</concept>
+</idea>
+</col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../019/4839019.xml'>
+Frequency</link>&nbsp;&amp;bull; <information wordnetid='105816287' confidence='0.8'>
+<datum wordnetid='105816622' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../515/935515.xml'>
+Contingency table</link></datum>
+</information>
+</col>
+</row>
+</table>
+</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../577/27577.xml'>
+Inferential statistics</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../571/49571.xml'>
+Bayesian inference</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../284/30284.xml'>
+Hypothesis testing</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../995/160995.xml'>
+Significance</link>&nbsp;&amp;bull; <process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../213/332213.xml'>
+Z-test</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+&nbsp;&amp;bull; <process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../080/536080.xml'>
+Student's t-test</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+&nbsp;&amp;bull; <process wordnetid='105701363' confidence='0.8'>
+<information wordnetid='105816287' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<datum wordnetid='105816622' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../680/226680.xml'>
+Chi-square test</link></higher_cognitive_process>
+</trial>
+</datum>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</information>
+</process>
+&nbsp;&amp;bull; <process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../976/318976.xml'>
+F-test</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../994/554994.xml'>
+P-value</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../381/160381.xml'>
+Interval estimation</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../806/140806.xml'>
+Maximum likelihood</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../533/19456533.xml'>
+Minimum distance</link>&nbsp;&amp;bull; <know-how wordnetid='105616786' confidence='0.8'>
+<method wordnetid='105660268' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../329/62329.xml'>
+Meta-analysis</link></method>
+</know-how>
+&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../911/280911.xml'>
+Confidence interval</link></col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../259/419259.xml'>
+Survival analysis</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../178/4649178.xml'>
+Survival function</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../650/3168650.xml'>
+Kaplan-Meier</link>&nbsp;&amp;bull; <process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../026/11871026.xml'>
+Logrank test</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../960/1336960.xml'>
+Failure rate</link>&nbsp;&amp;bull; <physical_entity wordnetid='100001930' confidence='0.8'>
+<person wordnetid='100007846' confidence='0.8'>
+<model wordnetid='110324560' confidence='0.8'>
+<assistant wordnetid='109815790' confidence='0.8'>
+<worker wordnetid='109632518' confidence='0.8'>
+<causal_agent wordnetid='100007347' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../267/5352267.xml'>
+Proportional hazards models</link></causal_agent>
+</worker>
+</assistant>
+</model>
+</person>
+</physical_entity>
+</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../057/157057.xml'>
+Correlation</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../999/3105999.xml'>
+Confounding variable</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../708/221708.xml'>
+Pearson product-moment correlation coefficient</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../627/3316627.xml'>
+Rank correlation</link> (<process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../623/235623.xml'>
+Spearman's rank correlation coefficient</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+, <process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../830/7287830.xml'>
+Kendall tau rank correlation coefficient</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+)</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<physical_entity wordnetid='100001930' confidence='0.8'>
+<person wordnetid='100007846' confidence='0.8'>
+<model wordnetid='110324560' confidence='0.8'>
+<assistant wordnetid='109815790' confidence='0.8'>
+<worker wordnetid='109632518' confidence='0.8'>
+<causal_agent wordnetid='100007347' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../904/17904.xml'>
+Linear model</link></causal_agent>
+</worker>
+</assistant>
+</model>
+</person>
+</physical_entity>
+s</col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../698/877698.xml'>
+General linear model</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../122/747122.xml'>
+Generalized linear model</link>&nbsp;&amp;bull; <process wordnetid='105701363' confidence='0.8'>
+<inquiry wordnetid='105797597' confidence='0.8'>
+<thinking wordnetid='105770926' confidence='0.8'>
+<problem_solving wordnetid='105796750' confidence='0.8'>
+<experiment wordnetid='105798043' confidence='0.8'>
+<trial wordnetid='105799212' confidence='0.8'>
+<higher_cognitive_process wordnetid='105770664' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../634/634.xml'>
+Analysis of variance</link></higher_cognitive_process>
+</trial>
+</experiment>
+</problem_solving>
+</thinking>
+</inquiry>
+</process>
+&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../926/404926.xml'>
+Analysis of covariance</link></col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../997/826997.xml'>
+Regression analysis</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../903/17903.xml'>
+Linear regression</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../012/1045012.xml'>
+Nonlinear regression</link>&nbsp;&amp;bull; <information wordnetid='105816287' confidence='0.8'>
+<datum wordnetid='105816622' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../631/226631.xml'>
+Logistic regression</link></datum>
+</information>
+</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<chart wordnetid='106999802' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../463/15934463.xml'>
+Statistical graphics</link></visual_communication>
+</chart>
+</col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../311/393311.xml'>
+Bar chart</link>&nbsp;&amp;bull; <chart wordnetid='106999802' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../166/14306166.xml'>
+Biplot</link></visual_communication>
+</chart>
+&nbsp;&amp;bull; <chart wordnetid='106999802' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../960/160960.xml'>
+Box plot</link></visual_communication>
+</chart>
+&nbsp;&amp;bull; <artifact wordnetid='100021939' confidence='0.8'>
+<instrumentality wordnetid='103575240' confidence='0.8'>
+<tool wordnetid='104451818' confidence='0.8'>
+<chart wordnetid='106999802' confidence='0.8'>
+<implement wordnetid='103563967' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../754/435754.xml'>
+Control chart</link></visual_communication>
+</implement>
+</chart>
+</tool>
+</instrumentality>
+</artifact>
+&nbsp;&amp;bull; <know-how wordnetid='105616786' confidence='0.8'>
+<chart wordnetid='106999802' confidence='0.8'>
+<method wordnetid='105660268' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../359/11394359.xml'>
+Forest plot</link></visual_communication>
+</method>
+</chart>
+</know-how>
+&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../266/13266.xml'>
+Histogram</link>&nbsp;&amp;bull; <chart wordnetid='106999802' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../859/4031859.xml'>
+Q-Q plot</link></visual_communication>
+</chart>
+&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../749/6392749.xml'>
+Run chart</link>&nbsp;&amp;bull; <artifact wordnetid='100021939' confidence='0.8'>
+<instrumentality wordnetid='103575240' confidence='0.8'>
+<tool wordnetid='104451818' confidence='0.8'>
+<chart wordnetid='106999802' confidence='0.8'>
+<implement wordnetid='103563967' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../544/412544.xml'>
+Scatterplot</link></visual_communication>
+</implement>
+</chart>
+</tool>
+</instrumentality>
+</artifact>
+&nbsp;&amp;bull; <chart wordnetid='106999802' confidence='0.8'>
+<visual_communication wordnetid='106873252' confidence='0.8'>
+<link xlink:type='simple' xlink:href='../649/977649.xml'>
+Stemplot</link></visual_communication>
+</chart>
+</col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+<link xlink:type='simple' xlink:href='../442/14986442.xml'>
+History</link></col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-even'>
+<link xlink:type='simple' xlink:href='../442/14986442.xml'>
+History of statistics</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../208/19095208.xml'>
+Founders of statistics</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../692/19373692.xml'>
+Timeline of probability and statistics</link></col>
+</row>
+<row style='height:2px'>
+
+</row>
+<row>
+<col style=';;' class='navbox-group'>
+Publications</col>
+<col style='text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;' class='navbox-list navbox-odd'>
+<link xlink:type='simple' xlink:href='../827/18753827.xml'>
+Journals in statistics</link>&nbsp;&amp;bull; <link xlink:type='simple' xlink:href='../879/708879.xml'>
+Important publications</link></col>
+</row>
+<row style='height:2px;'>
+
+</row>
+<row>
+<col colspan='2' style=';' class='navbox-abovebelow'>
+<b>
+Statistics|Category</b>&nbsp;&amp;bull; <b>
+Portal</b>&nbsp;&amp;bull; <b><link xlink:type='simple' xlink:href='../457/191457.xml'>
+List of topics</link></b></col>
+</row>
+</table>
+</col>
+</row>
+</table>
+</p>
+
+
+
+
+
+</sec>
+</bdy>
+</article>
