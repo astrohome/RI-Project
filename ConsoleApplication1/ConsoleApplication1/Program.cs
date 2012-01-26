@@ -33,7 +33,7 @@ namespace ConsoleApplication1
             
             int max = 19738249;
             String url;
-            for (int i = 600; i < 640; i++)
+            for (int i = 600; i < max; i++)
             {
                 url=folder+i+".xml";
                 if(File.Exists(url))
@@ -48,14 +48,13 @@ namespace ConsoleApplication1
             XmlTextReader reader = new XmlTextReader(url);
             String[] delim = new String[2];
             string last = "last";
-            string path;
             delim[0] = "coll\\";
             delim[1]=".xml";
             String[] s = url.Split(delim,System.StringSplitOptions.None);
             Int32.TryParse(s[s.Length -2],out _currentDocument.number);
             bool tof = true;
             while (tof)
-                //for (int i = 0; i < 300; i++)
+
                 {
                     try
                     {
@@ -73,7 +72,6 @@ namespace ConsoleApplication1
                             k = balises[last];
                             last += "["+k+"]";
                             al.Add(last);
-                            //Console.WriteLine(reader.Name + " ++ ");
                             
                         }
                         if (reader.NodeType == XmlNodeType.EndElement)
@@ -84,7 +82,6 @@ namespace ConsoleApplication1
                             {
                                 
                                 al.RemoveAt(al.Count - 1);
-                                //Console.WriteLine(reader.Name + " -- ");
 
                             }
                         }
@@ -119,6 +116,7 @@ namespace ConsoleApplication1
                     //if it was only symbol, continue;
                     if (w == "") continue;
 
+                    // converting the path into a string
                     string path="";
                     for (int j = 0; j < al.Count; j++)
                         path += "/" + al[j];
@@ -129,10 +127,11 @@ namespace ConsoleApplication1
                         //check if there is current document in list
                         if (GlobalStatistic[w].ContainsKey(_currentDocument.number))
                         {
-                            //if so, increment statistic for that document.
+                            //if so, check if the current tag (balise) is in list
                             if (GlobalStatistic[w][_currentDocument.number].ContainsKey(path))
                                 (GlobalStatistic[w][_currentDocument.number])[path]++;
 
+                            //increment statistic for that document.
                             else
                                 GlobalStatistic[w][_currentDocument.number].Add(path, 1);
                         }
@@ -145,10 +144,6 @@ namespace ConsoleApplication1
                     {
                         GlobalStatistic.Add(w, new Dictionary<int , Dictionary<string,int>> { { _currentDocument.number, new Dictionary<string, int> { { path ,1 } } } });
                         
-                   
-                        twr.WriteLine(w);
-                        twr.WriteLine(path);
-                        twr.Close();
                     }
                 }
             }
