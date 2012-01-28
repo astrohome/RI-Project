@@ -20,6 +20,8 @@ namespace RIStats
         public readonly Dictionary<Int32, Int32> dl = new Dictionary<Int32, Int32>();
         public readonly Dictionary<String, Int32> df = new Dictionary<string, int>();
 
+        public readonly List<String> requests = new List<string>();
+
         private Double _avdl = 0;
         public Double avdl
         {
@@ -69,6 +71,9 @@ namespace RIStats
         {
             foreach (var w in tf)
             {
+                if (!requests.Contains(w.Key.Trim(new char[] { '+' })))
+                    continue;
+
                 foreach (var doc in w.Value)
                 {
                     Double bm25 = (Double) (doc.Value * (K + 1.0f)) / (K * ((1.0f - B) + B * dl[doc.Key] / avdl) + doc.Value) * Math.Log((N - df[w.Key] + 0.5f) / (df[w.Key] + 0.5f));
@@ -90,10 +95,26 @@ namespace RIStats
             }
         }
 
+        public void clean_n_clear()
+        {
+            foreach (var x in df.Keys.ToList())
+            { df[x] = 0; }
+            foreach (var x in dl.Keys.ToList())
+            { dl[x] = 0; }
+            foreach (var x in docsltn.Keys.ToList())
+            { docsltn[x] = 0; }
+            foreach (var x in bm25_tf_finals.Keys.ToList())
+            { bm25_tf_finals[x] = 0; }
+            bm25_tf.Clear();
+        }
+
         public void Proceedltn()
         {
             foreach (var w in tf)
             {
+                if (!requests.Contains(w.Key.Trim(new char[] { '+' })))
+                    continue;
+
                 Int32 df2 = dfw(w.Key);
                 df[w.Key] = df2;
                 
