@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.IO;
-using System.Text;
 
 namespace RIStats
 {
@@ -78,6 +77,7 @@ namespace RIStats
             }
             return val;
         }
+
         public void Proceedltn()
         {
             foreach (var w in GlobalStatistic)

@@ -59,7 +59,7 @@ namespace RIStats
             }
         }
         Statistics stats = new Statistics();
-        Stati
+        XMLStatistics statsXML = new XMLStatistics();
 
         private void bSelectFile_Click(object sender, EventArgs e)
         {
@@ -190,9 +190,35 @@ namespace RIStats
             sw.Close();
         }
 
+        /// <summary>
+        /// Here proceeding of XML
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void bXML_Click(object sender, EventArgs e)
         {
+            bXML.Enabled = false;
+            using (FolderBrowserDialog dlg = new FolderBrowserDialog())
+            {
+                dlg.Description = "Select a folder";
+                //dlg.RootFolder =  Path.GetDirectoryName(Application.ExecutablePath);
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    Task task = Task.Factory.StartNew(() =>
+                 {
+                     statsXML.Proceed(dlg.SelectedPath);
+                 }).ContinueWith(_ =>
+            {
+                //******************************
+                //Please add here!!
+            });
+                }
+            }
 
+            //statsXML.B = 0.5;
+            //statsXML.K = 1;
+            
         }
     }
 }
