@@ -189,7 +189,7 @@ namespace RIStats
             sw.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bXML_Click(object sender, EventArgs e)
         {
 
         }
