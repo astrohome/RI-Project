@@ -59,6 +59,7 @@ namespace RIStats
             }
         }
         Statistics stats = new Statistics();
+        Stati
 
         private void bSelectFile_Click(object sender, EventArgs e)
         {
