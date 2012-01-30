@@ -121,11 +121,11 @@ namespace RIStats
                 foreach (var doc in w.Value)
                 {
                     double ltn = 0;
-                    dl[doc.Key] = df2;
+                    
                     if(df2!=0)
                         ltn = Math.Log10(1 + doc.Value) * N / df2;
 
-                    dl[doc.Key] += df2;
+                    //dl[doc.Key] += doc.Value;
                     
                     docsltn[doc.Key] += ltn;
                     //Console.WriteLine("Word " + w.Key.ToString() + " in doc " + doc.Key + " has ltn: " + ltn);

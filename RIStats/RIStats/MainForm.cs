@@ -190,6 +190,40 @@ namespace RIStats
             sw.Close();
         }
 
+        public void WriteToFileXML(String request)
+        {
+            StreamWriter sw = new StreamWriter("Izotov_01_ltn_XML.txt", true);
+
+            //2009011 Q0 3945065 21 73.61 OualidSamiYounessYassine /article[1]
+            int rank = 0;
+            
+            Dictionary<int, int> w = (from statsXML.docsltn.Values select val
+
+            foreach (var doc in statsXML.docsltn.OrderByDescending(x=>x.Value.Values.OrderByDescending(y=>y)))
+            {
+                foreach (var path in doc.Value)
+                {
+                    sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " ltn " + path.Key);
+                    rank++;
+                    if (rank == 1500) break;
+                }
+            }
+
+            sw.Close();
+            /*
+            sw = new StreamWriter("Izotov_01_bm25_XML.txt", true);
+
+            rank = 0;
+            foreach (var doc in stats.bm25_tf_finals.OrderByDescending(x => x.Value))
+            {
+                sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(doc.Value, 2) + " ltn /article[1]");
+                rank++;
+                if (rank == 1500) break;
+            }
+
+            sw.Close();*/
+        }
+
         /// <summary>
         /// Here proceeding of XML
         /// </summary>
@@ -207,11 +241,16 @@ namespace RIStats
                 {
                     Task task = Task.Factory.StartNew(() =>
                  {
-                     statsXML.Proceed(dlg.SelectedPath);
+                     statsXML.Proceed(dlg.SelectedPath, 150);
                  }).ContinueWith(_ =>
             {
-                //******************************
-                //Please add here!!
+                statsXML.requests.Clear();
+                statsXML.requests.Add("olive");
+                statsXML.requests.Add("oil");
+                statsXML.requests.Add("health");
+                statsXML.requests.Add("benefit");
+                statsXML.Proceedltn();
+                WriteToFileXML("2009011");
             });
                 }
             }
