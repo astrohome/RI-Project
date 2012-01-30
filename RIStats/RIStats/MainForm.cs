@@ -192,36 +192,70 @@ namespace RIStats
 
         public void WriteToFileXML(String request)
         {
-            StreamWriter sw = new StreamWriter("Izotov_01_ltn_XML.txt", true);
+            StreamWriter sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_ltn_XML.txt", true);
 
             //2009011 Q0 3945065 21 73.61 OualidSamiYounessYassine /article[1]
             int rank = 0;
-            
-            Dictionary<int, int> w = (from statsXML.docsltn.Values select val
 
-            foreach (var doc in statsXML.docsltn.OrderByDescending(x=>x.Value.Values.OrderByDescending(y=>y)))
+            Dictionary<Int32, Dictionary<String, Double>> newDocsltn = new Dictionary<Int32, Dictionary<String, Double>>();
+            foreach (var d in statsXML.docsltn)
+            {
+                var t = (from entry in d.Value orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+                newDocsltn.Add(d.Key, t);
+            }
+
+            bool flag = false;
+            
+            foreach (var doc in newDocsltn.OrderByDescending(x => x.Value.ToList()[0].Value))
             {
                 foreach (var path in doc.Value)
                 {
+                    if (path.Value == 0) break;
                     sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " ltn " + path.Key);
+                    sw.Flush();
                     rank++;
-                    if (rank == 1500) break;
+                    if (rank == 1500)
+                    {
+                        flag = true;
+                        break;
+                    }
                 }
+
+                if (flag) break;
             }
 
             sw.Close();
-            /*
-            sw = new StreamWriter("Izotov_01_bm25_XML.txt", true);
+            
+            sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_bm25_XML.txt", true);
 
             rank = 0;
-            foreach (var doc in stats.bm25_tf_finals.OrderByDescending(x => x.Value))
+            Dictionary<Int32, Dictionary<String, Double>> newDocsBM25 = new Dictionary<Int32, Dictionary<String, Double>>();
+            foreach (var d in statsXML.docsbm25)
             {
-                sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(doc.Value, 2) + " ltn /article[1]");
-                rank++;
-                if (rank == 1500) break;
+                var t = (from entry in d.Value orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+                newDocsBM25.Add(d.Key, t);
             }
 
-            sw.Close();*/
+            flag = false;
+            //var res = statsXML.docsbm25.Select(f => new KeyValuePair<int, Dictionary<string, double>>(f.Key, (from entry in f.Value orderby entry.Value ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value))).OrderByDescending(x => x.Value.ToList()[0].Value);
+            foreach (var doc in newDocsBM25.OrderByDescending(x => x.Value.ToList()[0].Value))
+            {
+                foreach (var path in doc.Value)
+                {
+                    if (path.Value == 0) break;
+                    sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " bm25 " + path.Key);
+                    rank++;
+                    if (rank == 1500)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (flag) break;
+            }
+
+            sw.Close();
         }
 
         /// <summary>
@@ -236,12 +270,13 @@ namespace RIStats
             using (FolderBrowserDialog dlg = new FolderBrowserDialog())
             {
                 dlg.Description = "Select a folder";
-                //dlg.RootFolder =  Path.GetDirectoryName(Application.ExecutablePath);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     Task task = Task.Factory.StartNew(() =>
                  {
-                     statsXML.Proceed(dlg.SelectedPath, 150);
+                     statsXML.Proceed(dlg.SelectedPath, 500);
+                     statsXML.B = 0.5;
+                     statsXML.K = 1;
                  }).ContinueWith(_ =>
             {
                 statsXML.requests.Clear();
@@ -250,6 +285,7 @@ namespace RIStats
                 statsXML.requests.Add("health");
                 statsXML.requests.Add("benefit");
                 statsXML.Proceedltn();
+                statsXML.ProceedBM25_TF();
                 WriteToFileXML("2009011");
             });
                 }

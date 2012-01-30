@@ -21,13 +21,14 @@ namespace RIStats
         public Dictionary<Int32, Dictionary<String, Dictionary<String, Int32>>> tf = new Dictionary<Int32, Dictionary<String, Dictionary<String, Int32>>>(); 
 
         public Dictionary<String, Int32> tag_df = new Dictionary<string, int>();
-        public Dictionary<String, Int32> word_df = new Dictionary<string, int>();
+        public Dictionary<String, Dictionary<String, Int32>> word_df = new Dictionary<String, Dictionary<String, Int32>>();
         public List<String> words = new List<string>();
         public Dictionary<String, Int32> tagsN = new Dictionary<String, Int32>();
 
         private Dictionary<String, Dictionary<String, Int32>> tags_df = new Dictionary<string, Dictionary<string, int>>();
 
         public readonly Dictionary<Int32, Dictionary<String, Double>> docsltn = new Dictionary<Int32, Dictionary<String, Double>>();
+        public readonly Dictionary<Int32, Dictionary<String, Double>> docsbm25 = new Dictionary<int, Dictionary<string, double>>();
         public readonly Dictionary<Int32, Dictionary<String, Int32>> dl = new Dictionary<int, Dictionary<string, int>>();
 
         public Dictionary<string, Int32> balises = new Dictionary<string, int>();
@@ -66,27 +67,30 @@ namespace RIStats
         {
             foreach (var doc in tf)
             {
-                Dictionary<String, String> wordsInDoc = new Dictionary<string, string>();
                 foreach (var path in doc.Value)
                 {
                     foreach (var w in path.Value)
                     {
-                        if (!wordsInDoc.ContainsKey(w.Key)) wordsInDoc.Add(w.Key, w.Key);
+                        if (!word_df.ContainsKey(w.Key))
+                            word_df.Add(w.Key, new Dictionary<string, int>() { { GetLeaf(path.Key), 1 } });
+                        else
+                            if (word_df[w.Key].ContainsKey(GetLeaf(path.Key)))
+                                word_df[w.Key][GetLeaf(path.Key)]++;
+                            else word_df[w.Key].Add(GetLeaf(path.Key), 1);
                     }
-                }
-
-                foreach (var w in wordsInDoc)
-                {
-                    if (word_df.ContainsKey(w.Key))
-                        word_df[w.Key]++;
-                    else word_df.Add(w.Key, 1);
                 }
             }
         }
 
-        private Int32 df(String word)
+        private String GetLeaf(String path)
         {
-            return word_df[word];
+            var t = path.Split(new char[] { '/' });
+            return t[t.Length - 1].Remove(t[t.Length - 1].IndexOf('['));
+        }
+
+        private Int32 df(String word, String path)
+        {
+            return word_df[word][GetLeaf(path)];
         }
 
         public void Proceed(String url, Int32 count)
@@ -115,6 +119,7 @@ namespace RIStats
 
                                 k = balises[last];
                                 last += "[" + k + "]";
+                                if (al.Count == 4) break;
                                 al.Add(last);
                                 _currentPath = last;
 
@@ -129,6 +134,8 @@ namespace RIStats
                             break;
                         case XmlNodeType.EndElement:
                             {
+                                if (al.Count == 0) break;
+
                                 last = (al[al.Count - 1]).ToString();
                                 string nom_balise = reader.Name;
                                 if (last.Contains(nom_balise))
@@ -162,12 +169,31 @@ namespace RIStats
                     {
                         if(requests.Contains(t.Key))
                         {
-                            var df2 = df(t.Key);
+                            var df2 = df(t.Key, path.Key);
                             if(df2!=0)
                                 docsltn[doc.Key][path.Key] += Math.Log10(1 + t.Value) * N / df2;
 
                             //dl[doc.Key][path.Key] += t.Value;
                         }
+                    }
+                }
+            }
+        }
+        
+        public void ProceedBM25_TF()
+        {
+            foreach (var doc in tf)
+            {
+                foreach (var path in doc.Value)
+                {
+                    foreach (var word in path.Value)
+                    {
+                        if (!requests.Contains(word.Key))
+                            continue;
+
+                        Double bm25 = (Double)(word.Value * (K + 1.0f)) / (K * ((1.0f - B) + B * dl[doc.Key][path.Key] / avdl) + word.Value) * Math.Log((N - df(word.Key, path.Key) + 0.5f) / (df(word.Key, path.Key) + 0.5f));
+
+                        docsbm25[doc.Key][path.Key] += bm25;
                     }
                 }
             }
@@ -187,7 +213,13 @@ namespace RIStats
                 path += "/" + al[j];
 
             _currentPath = path;
-            
+
+            if (docsbm25.ContainsKey(_currentDocument))
+                if (!docsbm25[_currentDocument].ContainsKey(_currentPath))
+                    docsbm25[_currentDocument].Add(_currentPath, 0);
+                else { }
+            else docsbm25.Add(_currentDocument, new Dictionary<string, double>() { { _currentPath, 0 } });
+
             if (docsltn.ContainsKey(_currentDocument))
                 if (!docsltn[_currentDocument].ContainsKey(_currentPath))
                     docsltn[_currentDocument].Add(_currentPath, 0);
