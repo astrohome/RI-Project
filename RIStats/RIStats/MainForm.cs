@@ -13,6 +13,9 @@ namespace RIStats
 {
     public partial class MainForm : Form
     {
+        private bool ltn = false;
+        private bool bm25 = true;
+
         public MainForm()
         {
             InitializeComponent();
@@ -192,70 +195,79 @@ namespace RIStats
 
         public void WriteToFileXML(String request)
         {
-            StreamWriter sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_ltn_XML.txt", true);
-
-            //2009011 Q0 3945065 21 73.61 OualidSamiYounessYassine /article[1]
-            int rank = 0;
-
-            Dictionary<Int32, Dictionary<String, Double>> newDocsltn = new Dictionary<Int32, Dictionary<String, Double>>();
-            foreach (var d in statsXML.docsltn)
-            {
-                var t = (from entry in d.Value orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
-                newDocsltn.Add(d.Key, t);
-            }
-
-            bool flag = false;
+            StreamWriter sw;
+            int rank;
+            bool flag;
             
-            foreach (var doc in newDocsltn.OrderByDescending(x => x.Value.ToList()[0].Value))
+            if (ltn)
             {
-                foreach (var path in doc.Value)
+                sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_ltn_XML.txt", true);
+
+                //2009011 Q0 3945065 21 73.61 IlliaJeanNoelAmineBechar /article[1]
+                rank = 0;
+
+                Dictionary<Int32, Dictionary<String, Double>> newDocsltn = new Dictionary<Int32, Dictionary<String, Double>>();
+                foreach (var d in statsXML.docsltn)
                 {
-                    if (path.Value == 0) break;
-                    sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " ltn " + path.Key);
-                    sw.Flush();
-                    rank++;
-                    if (rank == 1500)
-                    {
-                        flag = true;
-                        break;
-                    }
+                    var t = (from entry in d.Value orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+                    newDocsltn.Add(d.Key, t);
                 }
 
-                if (flag) break;
-            }
+                flag = false;
 
-            sw.Close();
-            
-            sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_bm25_XML.txt", true);
-
-            rank = 0;
-            Dictionary<Int32, Dictionary<String, Double>> newDocsBM25 = new Dictionary<Int32, Dictionary<String, Double>>();
-            foreach (var d in statsXML.docsbm25)
-            {
-                var t = (from entry in d.Value orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
-                newDocsBM25.Add(d.Key, t);
-            }
-
-            flag = false;
-            //var res = statsXML.docsbm25.Select(f => new KeyValuePair<int, Dictionary<string, double>>(f.Key, (from entry in f.Value orderby entry.Value ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value))).OrderByDescending(x => x.Value.ToList()[0].Value);
-            foreach (var doc in newDocsBM25.OrderByDescending(x => x.Value.ToList()[0].Value))
-            {
-                foreach (var path in doc.Value)
+                foreach (var doc in newDocsltn.OrderByDescending(x => x.Value.ToList()[0].Value))
                 {
-                    if (path.Value == 0) break;
-                    sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " bm25 " + path.Key);
-                    rank++;
-                    if (rank == 1500)
+                    foreach (var path in doc.Value)
                     {
-                        flag = true;
-                        break;
+                        if (path.Value == 0) break;
+                        sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " ltn " + path.Key);
+                        sw.Flush();
+                        rank++;
+                        if (rank == 1500)
+                        {
+                            flag = true;
+                            break;
+                        }
                     }
+
+                    if (flag) break;
                 }
 
-                if (flag) break;
+                sw.Close();
             }
+            if (bm25)
+            {
+                sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_bm25_WT=2_XML.txt", true);
 
-            sw.Close();
+                rank = 0;
+                Dictionary<Int32, Dictionary<String, Double>> newDocsBM25 = new Dictionary<Int32, Dictionary<String, Double>>();
+                foreach (var d in statsXML.docsbm25)
+                {
+                    var t = (from entry in d.Value orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+                    newDocsBM25.Add(d.Key, t);
+                }
+
+                flag = false;
+                //var res = statsXML.docsbm25.Select(f => new KeyValuePair<int, Dictionary<string, double>>(f.Key, (from entry in f.Value orderby entry.Value ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value))).OrderByDescending(x => x.Value.ToList()[0].Value);
+                foreach (var doc in newDocsBM25.OrderByDescending(x => x.Value.ToList()[0].Value))
+                {
+                    foreach (var path in doc.Value)
+                    {
+                        if (path.Value == 0) break;
+                        sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " bm25 " + path.Key);
+                        rank++;
+                        if (rank == 1500)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if (flag) break;
+                }
+
+                sw.Close();
+            }
         }
 
         /// <summary>

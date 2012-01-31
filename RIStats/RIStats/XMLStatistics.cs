@@ -34,6 +34,15 @@ namespace RIStats
         public Dictionary<string, Int32> balises = new Dictionary<string, int>();
         public System.Collections.ArrayList al = new System.Collections.ArrayList();
 
+        /*
+         * WEIGHTS
+         */
+        private int title_weight = 2;
+
+        /**/
+        private bool weightedFreq = true;
+        private bool weightedScore = false; // Both Cannot be true simultaneously
+
         private Double _avdl = 0;
         public Double avdl
         {
@@ -179,21 +188,47 @@ namespace RIStats
                 }
             }
         }
-        
+
+        private int BM25F_WeightField(KeyValuePair<string, Dictionary<string,int>> path)
+        {
+            string leaf = GetLeaf(path.Key);
+            int weight = 1;
+
+            switch (leaf)
+            {
+                case "title":
+                    weight = title_weight;
+                    break;
+            }
+            return weight;
+        }
+
         public void ProceedBM25_TF()
         {
+            int wf; //weight for frequencies
+            int ws; //weight for scores
+
             foreach (var doc in tf)
             {
                 foreach (var path in doc.Value)
                 {
+                    wf = 1;
+                    ws = 1;
+
+                    if (weightedFreq)
+                        wf = BM25F_WeightField(path);
+
+                    if (weightedScore && !weightedFreq)
+                        ws = BM25F_WeightField(path);
+
                     foreach (var word in path.Value)
                     {
                         if (!requests.Contains(word.Key))
                             continue;
 
-                        Double bm25 = (Double)(word.Value * (K + 1.0f)) / (K * ((1.0f - B) + B * dl[doc.Key][path.Key] / avdl) + word.Value) * Math.Log((N - df(word.Key, path.Key) + 0.5f) / (df(word.Key, path.Key) + 0.5f));
+                        Double bm25 = (Double)(wf * word.Value * (K + 1.0f)) / (K * ((1.0f - B) + B * dl[doc.Key][path.Key] / avdl) + wf * word.Value) * Math.Log((N - df(word.Key, path.Key) + 0.5f) / (df(word.Key, path.Key) + 0.5f));
 
-                        docsbm25[doc.Key][path.Key] += bm25;
+                        docsbm25[doc.Key][path.Key] += ws * bm25;
                     }
                 }
             }
