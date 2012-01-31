@@ -198,7 +198,9 @@ namespace RIStats
             StreamWriter sw;
             int rank;
             bool flag;
-            
+            bool flag2;
+            List<string> paths = new List<string>();
+
             if (ltn)
             {
                 sw = new StreamWriter("IlliaJeanNoelAmineBechar_02_ltn_XML.txt", true);
@@ -251,8 +253,19 @@ namespace RIStats
                 //var res = statsXML.docsbm25.Select(f => new KeyValuePair<int, Dictionary<string, double>>(f.Key, (from entry in f.Value orderby entry.Value ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value))).OrderByDescending(x => x.Value.ToList()[0].Value);
                 foreach (var doc in newDocsBM25.OrderByDescending(x => x.Value.ToList()[0].Value))
                 {
+                    paths.Clear();
                     foreach (var path in doc.Value)
                     {
+                        flag2 = false;
+                        foreach (var path2 in paths)
+                        {
+                            if (path.Key.Contains(path2) || path2.Contains(path.Key))
+                                flag2 = true;
+                        }
+                        
+                        if (flag2) break;
+                        else paths.Add(path.Key);
+
                         if (path.Value == 0) break;
                         sw.WriteLine(request + " Q0 " + doc.Key.ToString() + " " + rank + " " + Math.Round(path.Value, 2) + " bm25 " + path.Key);
                         rank++;
@@ -286,7 +299,7 @@ namespace RIStats
                 {
                     Task task = Task.Factory.StartNew(() =>
                  {
-                     statsXML.Proceed(dlg.SelectedPath, 500);
+                     statsXML.Proceed(dlg.SelectedPath, 200);
                      statsXML.B = 0.5;
                      statsXML.K = 1;
                  }).ContinueWith(_ =>
